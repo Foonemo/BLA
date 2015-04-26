@@ -1,0 +1,9 @@
+{% if art_piece_list %}
+    <ul>
+    {% for art_piece in art_piece_list %}
+        <li><a href="/ms/{{art_piece.art_id }}/">{{ art_piece.picLink }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
