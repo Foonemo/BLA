@@ -122,7 +122,7 @@ class Create(models.Model):
         ordering = ['art']
 
     def __str__(self):
-        return str(self.art) + '-' + str(self.artist)
+        return str(self.art) + ' | ' + str(self.artist)
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()

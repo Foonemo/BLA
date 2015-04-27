@@ -1,7 +1,12 @@
+<h1> Art Pieces </h1>
+
 {% if art_piece_list %}
     <ul>
     {% for art_piece in art_piece_list %}
-        <li><a href="/ms/{{art_piece.art_id }}/">{{ art_piece.picLink }}</a></li>
+    <!-- <li><a href="/ms/{{art_piece.art_id}}/">{{art_piece.name}}</a></li> -->
+	<li><img src="{{art_piece.piclink}}"></a></li>
+<p><cite>{{art_piece.name}}</cite></p>
+
     {% endfor %}
     </ul>
 {% else %}
