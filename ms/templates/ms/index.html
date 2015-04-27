@@ -1,39 +1,81 @@
 <!DOCTYPE html>
 <html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+	<link rel="stylesheet"
+		  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+
+  <script>
+	$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+	});
+  </script>
 
   {% load staticfiles %}
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" /> -->
-
-  <div class="jumbotron">
-	<head><title> BLA - Birds Love Arts </title></head>
-	<h1 style="text-align:center"> BLA </h1>
-	<hr>
-	<h2 style="text-align:center"> Team: Veggie Birds </h2>
-  </div>
-
-  <div id="search_column">
-	<form>
-	  <fieldset>
-	  <input type="text" name="ms_query" value="SEARCH.."></fieldset>
-	</form>
-  </div>
-
-  <div id="search_bottom">
-	<form>
-	<input type="submit" value="search_db">
-	</form>
-  </div>
-
-  <div class="row">
-	<div class="col-sm-4">Mengyuan Diao</div>
-	<div class="col-sm-4">Junhan Zhu</div>
-	<div class="col-sm-4">Don Lee</div>
-    <!-- <div class="col-sm-4">Ruihao Zhu</div> -->
-  </div>
-
+<link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" />
 
   <body>
+	<div id="main" class="container">
 
+	  <div class="jumbotron">
+		<head><title> BLA - Birds Love Arts </title></head>
+		<div class="page-header">
+		  <h1 style="text-align:center">
+			B<small>irds </small>L<small>ove </small>A<small>rts </small> </h1>
+		</div>
+		<p class"text-muted"> Veggie Birds </p>
+
+		<div id="search_column" class="col-sm-8">
+
+			<div class="col-sm-8">
+			  <form class="form-horizontal" action="results/" method="post">
+				{% csrf_token %}
+				{{ form}}
+				<input type="submit">
+			  </form>
+			</div>
+
+			<div class="col-sm-3">
+			  <button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-search"></span> Search
+			  </button>
+			</div>
+
+		</div>
+
+		<div class="col-md-2">
+		  <div class="btn-group" id="seach_options">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			  Search From <span class="caret"></span></button>
+			<ul class="dropdown-menu" role="menu">
+			  <li><a href="#">Art Pieces</a></li>
+			  <li><a href="#">Artists</a></li>
+			  <li><a href="#">Museum</a></li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+
+	  <div>
+		<div class="col-md-3">
+		  <kbd><a href="#" data-toggle="tooltip" title="Eggplant Bird"
+			  style="text-decoration: none">
+			  Mengyuan Diao</a></kbd>
+		</div>
+		<div class="col-md-3"><kbd>
+			<a href="#" data-toggle="tooltip" title="Carrot Bird" style="text-decoration: none">
+			  Junhan Zhu</kbd></a></div>
+		<div class="col-md-3"><kbd>
+			<a href="#" data-toggle="tooltip" title="Spinach Bird" style="text-decoration: none">
+			  Don Lee</kbd></a></div>
+		<div class="col-md-3"><kbd><a href="#" data-toggle="tooltip"
+			  title="Broccoli Bird" style="text-decoration: none">
+			  Ruihao Zhu</kbd></a></div>
+	  </div>
+
+	</div>
   </body>
 </html>

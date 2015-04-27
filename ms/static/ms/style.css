@@ -1,25 +1,23 @@
-h1 {
-	color: #F57346;
-	font-family: verdana;
-	font-size: 500%
+p{
+	color: blue;
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
 }
 
-#tittle{
-	background-color:black;
-	color:white;
-	padding:20px;
+body{
+	Background-image: url("http://wallpapers55.com/wp-content/uploads/2013/09/Anonymous-mask-Wallpaper-HD.jpg");
 }
 
-#nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;
+#mengyuan{
 }
 
+#junhan{
+}
 
-body {
-	Background:
+#don{
+
+}
+
+#ruihao{
+
 }
