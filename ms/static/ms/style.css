@@ -1,23 +1,20 @@
-p{
-	color: blue;
-	text-align: center;
-	font-family: "Times New Roman", Times, serif;
+#BLA{
+	color:white;
 }
+
 
 body{
-	Background-image: url("http://wallpapers55.com/wp-content/uploads/2013/09/Anonymous-mask-Wallpaper-HD.jpg");
+	background-color:#000;
+
+	/* Background-image: url("http://picpulp.com/wp-content/uploads/2013/03/Birds_wallpapers_187.jpg"); */
+	/* background-size:cover; */
 }
 
-#mengyuan{
+.container{
+	color:white;
 }
 
-#junhan{
-}
 
-#don{
-
-}
-
-#ruihao{
-
+#team{
+	color:wheat
 }

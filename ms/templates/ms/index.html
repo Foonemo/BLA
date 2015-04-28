@@ -15,67 +15,31 @@
   </script>
 
   {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" />
 
   <body>
-	<div id="main" class="container">
 
-	  <div class="jumbotron">
-		<head><title> BLA - Birds Love Arts </title></head>
-		<div class="page-header">
-		  <h1 style="text-align:center">
-			B<small>irds </small>L<small>ove </small>A<small>rts </small> </h1>
-		</div>
-		<p class"text-muted"> Veggie Birds </p>
+	<div class="container">
+	  <div id="BLA" class="col-sm-6">
+	  <h1> B<small>irds</small> L<small>ove</small> A<small>rts</small> </h1>
 
-		<div id="search_column" class="col-sm-8">
-
-			<div class="col-sm-8">
-			  <form class="form-horizontal" action="results/" method="post">
-				{% csrf_token %}
-				{{ form}}
-				<input type="submit">
-			  </form>
-			</div>
-
-			<div class="col-sm-3">
-			  <button type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-search"></span> Search
-			  </button>
-			</div>
-
-		</div>
-
-		<div class="col-md-2">
-		  <div class="btn-group" id="seach_options">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			  Search From <span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-			  <li><a href="#">Art Pieces</a></li>
-			  <li><a href="#">Artists</a></li>
-			  <li><a href="#">Museum</a></li>
-			</ul>
-		  </div>
-		</div>
 	  </div>
-
-	  <div>
-		<div class="col-md-3">
-		  <kbd><a href="#" data-toggle="tooltip" title="Eggplant Bird"
-			  style="text-decoration: none">
-			  Mengyuan Diao</a></kbd>
+	  <div id="search_column" class="col-sm-10">
+		<div class="col-sm-9">
+		  <form action="." method="POST">
+			{% csrf_token %}
+			{{ form.content }}
 		</div>
-		<div class="col-md-3"><kbd>
-			<a href="#" data-toggle="tooltip" title="Carrot Bird" style="text-decoration: none">
-			  Junhan Zhu</kbd></a></div>
-		<div class="col-md-3"><kbd>
-			<a href="#" data-toggle="tooltip" title="Spinach Bird" style="text-decoration: none">
-			  Don Lee</kbd></a></div>
-		<div class="col-md-3"><kbd><a href="#" data-toggle="tooltip"
-			  title="Broccoli Bird" style="text-decoration: none">
-			  Ruihao Zhu</kbd></a></div>
+		<input type="submit" class="btn btn-primary" value="SEARCH"/>
+		</form>
 	  </div>
-
 	</div>
+	<!-- <div id="team"> -->
+	<!--   <div id="mengyuan" class="col-sm-2">Mengyuan Diao</div> -->
+	<!--   <div id="junhan" class="col-sm-2">Junhan Zhu</div> -->
+	<!--   <div id="don" class="col-sm-2">Don Lee</div> -->
+	<!--   <div id="ruihao" class="col-sm-2">Ruihao Zhu</div> -->
+	<!-- </div> -->
+
   </body>
 </html>

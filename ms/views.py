@@ -1,28 +1,38 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import ArtPiece
+from django.shortcuts import render, render_to_response
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import ArtPiece, Artist, Create, Event, Museum
 from django.template import RequestContext, loader, Context, Template
+from django.core.urlresolvers import reverse
+
 from .forms.VeggieForms import SearchForm
 
-
-def get_searchContent(request):
-    if request.method == 'GET':
-        form = SearchForm()
-    else:
+def index(request):
+    if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            return HttpResponseReidrect('/thanks/')
+            # Processing the data, i.e. query them from the database
+            search_query = form.cleaned_data['content']
+            # make a query
+            result_list = ArtPiece.objects.filter(name=search_query)
 
-    return render(request, 'ms/index.html', {'form': form,})
+            return render(request, 'ms/results.html',
+                          {'result_list': result_list,
+                           'query': search_query})
+        else:
+            # Direct to an error page
+            return HttpResponseRedirect('thanks/')
+    else:
+        form = SearchForm()
 
-def index(request):
-    return get_searchContent(request)
+
+    return render(request, 'ms/index.html', {'form': form})
 
 
-def result(request):
-    context = Context()
-    return render(request, 'ms/results.html', context)
+def results(request):
+    return render(request, 'ms/results.html', {})
 
+def thanks(request):
+    return render(request, 'ms/thanks.html', {})
 
 
 # a simple test
