@@ -1,4 +1,4 @@
-# BLA
-CS564 database web application
+###CS564 Course Project - BLA
 
-### use python manage.py runserver to run
+####Django
+####MySQL

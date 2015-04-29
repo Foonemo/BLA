@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<title>You Got It</title>
+	<title>Search Results</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -13,15 +13,26 @@
 
 	<div class="container">
 	  <p> Querying: {{query}} </p>
-	  {% if result_list %}
-      <ul>
-		{% for result in result_list %}
-		<li><a href="{{result.piclink}}">{{result.name}}</a></li>
 
+
+	  {% if art_piece_list %}
+	  <ul>
+		{% for art_piece in art_piece_list %}
+		<li><a href="{{art_piece.piclink}}">{{art_piece.name}}</a></li>
 		{% endfor %}
       </ul>
 	  {% else %}
-      <p>No polls are available.</p>
+      <p>No such art piece is available.</p>
+	  {% endif %}
+
+	  {% if event_list %}
+	  <ul>
+		{% for event in event_list %}
+		<li><a href="{{art_piece.piclink}}">{{event.name}}</a></li>
+		{% endfor %}
+      </ul>
+	  {% else %}
+      <p>No such event is available.</p>
 	  {% endif %}
 
 

@@ -6,6 +6,17 @@ from django.core.urlresolvers import reverse
 
 from .forms.VeggieForms import SearchForm
 
+def search_one(query):
+    if query.lower().find('event'):
+        return Event.objects.raw('select * from event')
+
+    elif query.lower().find('exhibition'):
+        return Event.objects.raw('select * from event where event_type="Exhibition"')
+
+    else:
+        return None
+
+
 def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -13,11 +24,20 @@ def index(request):
             # Processing the data, i.e. query them from the database
             search_query = form.cleaned_data['content']
             # make a query
-            result_list = ArtPiece.objects.filter(name=search_query)
 
-            return render(request, 'ms/results.html',
-                          {'result_list': result_list,
-                           'query': search_query})
+            result_list = search_one(search_query)
+
+#            result_list = Artist.objects.raw("select * from artist")
+
+            c = RequestContext(request, {'art_piece_list': result_list,
+                               'query': search_query})
+
+            return render(request, 'ms/results.html',c)
+
+            # return render(request, 'ms/results.html',
+            #               {'result_list': result_list,
+            #                'query': search_query})
+
         else:
             # Direct to an error page
             return HttpResponseRedirect('thanks/')

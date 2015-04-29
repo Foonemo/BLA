@@ -21,11 +21,11 @@
 
 	<div class="container">
 	  <div id="BLA" class="col-sm-6">
-	  <h1> B<small>irds</small> L<small>ove</small> A<small>rts</small> </h1>
+		<h1> B<small>irds</small> L<small>ove</small> A<small>rts</small> </h1>
 
 	  </div>
-	  <div id="search_column" class="col-sm-10">
-		<div class="col-sm-9">
+	  <div id="search_column" class="col-sm-12">
+		<div class="col-sm-10">
 		  <form action="." method="POST">
 			{% csrf_token %}
 			{{ form.content }}
@@ -33,13 +33,16 @@
 		<input type="submit" class="btn btn-primary" value="SEARCH"/>
 		</form>
 	  </div>
-	</div>
-	<!-- <div id="team"> -->
-	<!--   <div id="mengyuan" class="col-sm-2">Mengyuan Diao</div> -->
-	<!--   <div id="junhan" class="col-sm-2">Junhan Zhu</div> -->
-	<!--   <div id="don" class="col-sm-2">Don Lee</div> -->
-	<!--   <div id="ruihao" class="col-sm-2">Ruihao Zhu</div> -->
-	<!-- </div> -->
 
-  </body>
+	  <div id="team">
+		<div id="mengyuan" class="col-sm-3">Mengyuan Diao</div>
+		<div id="junhan" class="col-sm-3">Junhan Zhu</div>
+		<div id="don" class="col-sm-3">Don Lee</div>
+		<div id="ruihao" class="col-sm-3">Ruihao Zhu</div>
+	  </div>
+
+	</div>
+
+</div>
+</body>
 </html>

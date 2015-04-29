@@ -41,7 +41,7 @@ class Artist(models.Model):
         ordering = ['artist_id']
 
     def __str__(self):
-        return str(self.artist_id) + ': ' + self.name
+        return self.name
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
