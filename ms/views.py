@@ -66,14 +66,14 @@ def index(request):
                 event_list = None
 
 
-            c = RequestContext(request, {
+            context = RequestContext(request, {
                 'art_piece_list': art_piece_list,
                 'event_list': event_list,
                 'query':search_query,
 
             })
 
-            return render(request, 'ms/results.html',c)
+            return render(request, 'ms/results.html',context)
 
         else:
             # Direct to an error page
@@ -86,7 +86,7 @@ def index(request):
     style_list = ["N/A","Realist","Abstract","Expressionist","Conceptual"]
 
 
-    return render(request, 'ms/index_d.html', {'form': form,
+    return render(request, 'ms/index.html', {'form': form,
                                                'region_list': region_list,
                                                'type_list':type_list,
                                                'style_list':style_list})
@@ -100,11 +100,11 @@ def thanks(request):
 
 
 # a simple test
-def art_piece(request):
-    art_piece_list = ArtPiece.objects.raw('select * from art_piece order by art_id desc')
-#    template = loader.get_template('ms/art_piece.html')
-    context = RequestContext(request, {
-        'art_piece_list': art_piece_list,
-        })
-    #    return HttpResponse(template.render(context))
-    return render(request, 'ms/art_piece.html', context)
+# def art_piece(request):
+#     art_piece_list = ArtPiece.objects.raw('select * from art_piece order by art_id desc')
+# #    template = loader.get_template('ms/art_piece.html')
+#     context = RequestContext(request, {
+#         'art_piece_list': art_piece_list,
+#         })
+#     #    return HttpResponse(template.render(context))
+#     return render(request, 'ms/art_piece.html', context)

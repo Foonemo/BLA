@@ -24,6 +24,7 @@
 		<h1> B<small>irds</small> L<small>ove</small> A<small>rts</small> </h1>
 
 	  </div>
+
 	  <div id="search_column" class="col-sm-12">
 		<div class="col-sm-10">
 		  <form action="." method="POST">
@@ -33,6 +34,43 @@
 		<input type="submit" class="btn btn-primary" value="SEARCH"/>
 		</form>
 	  </div>
+
+
+
+	  <div id="select_choices" class="col-sm-12">
+		<div  class="col-sm-3">
+		  Region
+		  <select name="region" class="form-control">
+			{% for region in region_list %}
+			<option value="{{region}}">{{region}}</option>
+			{% endfor %}
+		  </select>
+		</div>
+
+		<div  class="col-sm-3">
+		  Type
+		  <select name="type" class="form-control">
+			{% for type in type_list %}
+			<option value="{{type}}">{{type}}</option>
+			{% endfor %}
+		  </select>
+		</div>
+
+		<div  class="col-sm-3">
+		  Style
+		  <select name="style" class="form-control">
+			{% for style in style_list %}
+			<option value="{{style}}">{{style}}</option>
+			{% endfor %}
+		  </select>
+		</div>
+
+		<!-- <div  class="col-sm-3"> -->
+		<!-- <input type="submit" class="btn btn-primary" value="SEARCH -->
+		<!-- 													COLLECTIONS"/> -->
+		<!-- </div> -->
+	  </div>
+
 
 	  <div id="team">
 		<div id="mengyuan" class="col-sm-3">Mengyuan Diao</div>
