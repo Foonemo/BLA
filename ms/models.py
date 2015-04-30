@@ -14,7 +14,7 @@ from django.db import models
 
 class ArtPiece(models.Model):
     art_id = models.IntegerField(primary_key=True)
-    name = models.TextField(blank=True, null=True)
+    art_name = models.TextField(blank=True, null=True)
     region = models.CharField(max_length=32)
     style = models.CharField(max_length=32, blank=True, null=True)
     art_type = models.CharField(max_length=32, blank=True, null=True)
@@ -28,12 +28,12 @@ class ArtPiece(models.Model):
         db_table = 'art_piece'
 
     def __str__(self):
-        return self.name
+        return self.art_name
 
 
 class Artist(models.Model):
     artist_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=45)
+    artist_name = models.CharField(max_length=45)
 
     class Meta:
         managed = False
@@ -41,7 +41,7 @@ class Artist(models.Model):
         ordering = ['artist_id']
 
     def __str__(self):
-        return self.name
+        return self.artist_name
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)

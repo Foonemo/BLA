@@ -16,11 +16,26 @@
 
 
 	  {% if art_piece_list %}
-	  <ul>
+	  <table style=width:100%>
+		<tr>
+		  <td>Name</td>
+		  <td>Region</td>
+		  <td><b>Style</b></td>
+		  <td>Type</td>
+		  <td>Description</td>
+		  <td>Artist</td>
+		</tr>
 		{% for art_piece in art_piece_list %}
-		<li><a href="{{art_piece.piclink}}">{{art_piece.name}}</a></li>
+		<tr>
+		  <td><a href="{{art_piece.piclink}}">{{art_piece.art_name}}</a></td>
+		  <td>{{art_piece.region}}</td>
+		  <td style=color:#e00><b>{{art_piece.style}}</b></td>
+		  <td>{{art_piece.art_type}}</td>
+		  <td>{{art_piece.description}}</td>
+		  <td>{{art_piece.artist_name}}</td>
+		</tr>
 		{% endfor %}
-      </ul>
+	  </table>
 	  {% else %}
       <p>No such art piece is available.</p>
 	  {% endif %}
@@ -34,8 +49,6 @@
 	  {% else %}
       <p>No such event is available.</p>
 	  {% endif %}
-
-
 
 	</div>
 
