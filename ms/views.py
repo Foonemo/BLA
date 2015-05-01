@@ -81,9 +81,9 @@ def index(request):
     else:
         form = SearchForm()
 
-    region_list = ["N/A","Asian", "African", "North American", "Central & South American", "Ocenanian", "European"]
-    type_list = ["N/A","Applied & Decorative Arts","Drawing","Painting","Photograph","Print", "Sculpture","Watercolor"]
-    style_list = ["N/A","Realist","Abstract","Expressionist","Conceptual"]
+    region_list = ["Asian", "African", "North American", "Central & South American", "Ocenanian", "European"]
+    type_list = ["Applied & Decorative Arts","Drawing","Painting","Photograph","Print", "Sculpture","Watercolor"]
+    style_list = ["Realist","Abstract","Expressionist","Conceptual"]
 
 
     return render(request, 'ms/index.html', {'form': form,
