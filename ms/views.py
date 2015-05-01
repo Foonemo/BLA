@@ -7,18 +7,70 @@ from django.db import connection
 
 from .forms.VeggieForms import SearchForm, SelectRegionForm, SelectTypeForm, SelectStyleForm
 
+def dictfetchall(cursor):
+    "Returns all rows from a cursor as a dict"
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
 
 def search_piece(query):
-        return ArtPiece.objects.raw("SELECT * FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id WHERE style=%s ", [query])
+
+       # res = ArtPiece.objects.raw("SELECT * FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id WHERE art_name LIKE '%%' %s '%%' OR region LIKE '%%' %s '%%' OR style LIKE '%%' %s '%%' OR art_type LIKE '%%' %s '%%' OR description LIKE '%%' %s '%%' OR artist_name LIKE '%%' %s '%%' ", [query, query, query, query, query, query])
+
+       cursor = connection.cursor()
+       cursor.execute(
+               ''' SELECT *
+               FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id
+               WHERE art_name LIKE '%%' %s '%%'
+               OR region LIKE '%%' %s '%%'
+               OR style LIKE '%%' %s '%%'
+               OR art_type LIKE '%%' %s '%%'
+               OR description LIKE '%%' %s '%%'
+               OR artist_name LIKE '%%' %s '%%'
+               ''', [query, query, query, query, query, query])
+       res = dictfetchall(cursor)
+
+       cursor.execute(
+               '''SELECT COUNT(*)
+               FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id
+               WHERE art_name LIKE '%%' %s '%%'
+               OR artist_name LIKE '%%' %s '%%'
+               OR region LIKE '%%' %s '%%'
+               OR style LIKE '%%' %s '%%'
+               OR art_type LIKE '%%' %s '%%'
+               OR description LIKE '%%' %s '%%' ''', [query, query, query, query, query, query])
+       row = cursor.fetchone()
+
+       return res, row[0]
+
+# def search_res_num(query):
+#         cursor = connection.cursor()
+#         cursor.execute('''SELECT COUNT(*) FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id WHERE art_name LIKE '%%' %s '%%' OR region LIKE '%%' %s '%%' OR style LIKE '%%' %s '%%' OR art_type LIKE '%%' %s '%%' OR description LIKE '%%' %s '%%' ''', [query, query, query, query, query])
+#         row = cursor.fetchone()
+#         return row[0]
 
 def search_event(query):
-    if query.lower().find('event') != -1:
-        return Event.objects.raw('select * from event')
+    # if query.lower().find('event') != -1:
+    #     return Event.objects.raw("SELECT * FROM event")
 
-    elif query.lower().find('exhibition') != -1:
-        return Event.objects.raw('select * from event where event_type="Exhibition"')
+    # elif query.lower().find('exhibition') != -1:
+    #     return Event.objects.raw('select * from event where event_type="Exhibition"')
+    # else:
+        res = Event.objects.raw("SELECT * FROM event WHERE event_name LIKE '%%' %s '%%'", [query])
 
-    return []
+        cursor = connection.cursor()
+        cursor.execute(
+                '''
+                SELECT COUNT(*)
+                FROM event
+                WHERE event_name LIKE '%%' %s '%%'
+                ''', [query])
+
+        row = cursor.fetchone()
+        return res, row[0]
 
 # def search_collections(region,style,s_type):
 # 	query=[]
@@ -51,33 +103,25 @@ def index(request):
             # Processing the data, i.e. query them from the database
             search_query = form.cleaned_data['content']
 
-            # s_region = request.POST.get['region']
-            # s_style = request.POST.get['style']
-            # s_type = request.POST.get['type']
-            # make a query
+            art_piece_list, piece_num= search_piece(search_query)
+            event_list, event_num = search_event(search_query)
 
-
-            art_piece_list = search_piece(search_query)
             if len(list(art_piece_list)) <= 0:
                 art_piece_list = None
 
-            event_list = search_event(search_query)
             if len(list(event_list)) <= 0:
                 event_list = None
 
-
             context = RequestContext(request, {
-                'art_piece_list': art_piece_list,
-                'event_list': event_list,
-                'query':search_query,
-
+                    'art_piece_list': art_piece_list,
+                    'piece_num': piece_num,
+                    'event_num': event_num,
+                    'event_list': event_list,
+                    'query':search_query,
             })
 
             return render(request, 'ms/results.html',context)
 
-        else:
-            # Direct to an error page
-            return HttpResponseRedirect('thanks/')
     else:
         form = SearchForm()
 

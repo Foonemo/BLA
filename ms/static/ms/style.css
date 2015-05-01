@@ -1,7 +1,5 @@
 body{
-
 	background-color:#292929;
-
 	/* Background-image: url("http://picpulp.com/wp-content/uploads/2013/03/Birds_wallpapers_187.jpg"); */
 	/* background-size:cover; */
 }
@@ -23,6 +21,11 @@ a {
 }
 
 #select_choices{
+	position:relative;
+	top:20px;
+}
+
+#events{
 	position:relative;
 	top:20px;
 }

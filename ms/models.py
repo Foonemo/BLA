@@ -170,7 +170,7 @@ class DjangoSession(models.Model):
 
 class Event(models.Model):
     event_id = models.IntegerField(primary_key=True)
-    name = models.TextField()
+    event_name = models.TextField()
     start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
     location = models.TextField(blank=True, null=True)
@@ -183,7 +183,7 @@ class Event(models.Model):
         db_table = 'event'
 
     def __str__(self):
-        return self.name
+        return self.event_name
 
 class Museum(models.Model):
     museum_id = models.IntegerField(primary_key=True)
