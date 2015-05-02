@@ -12,13 +12,13 @@
   {% load staticfiles %}
   <link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" />
 
-
   <body>
-
 	<div class="container">
-	  <blockquote>
-	  <p class="lead"> Searching.. <mark>{{query}}</mark> </p>
-	  </blockquote>
+	  <h2 class="lead">Searching.. <mark>{{query}}</mark></h2>
+	  <ul class="nav nav-tabs" role="tablist">
+		<li class="active"><a href="#">Art Pieces</a></li>
+		<li><a href="#">Events</a></li>
+	  </ul>
 
 	  {% if art_piece_list %}
 	  <div class="table-responsive">
@@ -61,23 +61,23 @@
 			<td>Type</td>
 			<td>Location</td>
 		  </tr>
-		{% for event in event_list %}
+		  {% for event in event_list %}
 		  <tr>
 			<td>{{event.event_name}}</a></td>
-			<td>{{event.start_time}}</td>
-			<td>{{event.end_time}}</td>
-			<td>{{event.event_type}}</td>
-			<td>{{event.location}}</td>
-		  </tr>
+<td>{{event.start_time}}</td>
+<td>{{event.end_time}}</td>
+<td>{{event.event_type}}</td>
+<td>{{event.location}}</td>
+</tr>
 
-		{% endfor %}
-		</table>
-	  </div>
-	  {% else %}
-      <p>No such event is available.</p>
-	  {% endif %}
+{% endfor %}
+</table>
+</div>
+{% else %}
+<p>No such event is available.</p>
+{% endif %}
 
-	</div>
+</div>
 
-  </body>
+</body>
 </html>
