@@ -62,7 +62,6 @@ def search_event(query):
         return res, row[0]
 
 
-
 def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -71,24 +70,17 @@ def index(request):
             search_query = form.cleaned_data['content']
 
             art_piece_list, piece_num= search_piece(search_query)
-            # event_list, event_num = search_event(search_query)
 
             if len(list(art_piece_list)) <= 0:
                 art_piece_list = None
 
-            # if len(list(event_list)) <= 0:
-            #     event_list = None
-
             context = RequestContext(request, {
                     'art_piece_list': art_piece_list,
                     'piece_num': piece_num,
-                    # 'event_num': event_num,
-                    # 'event_list': event_list,
                     'query':search_query,
             })
-
-            # return render(request, 'ms/results_artpieces.html',context)
-            return HttpResponseRedirect('./results/art_pieces/')
+            return render(request, 'ms/results_artpieces.html', context)
+#            return HttpResponseRedirect('/ms/results/art_pieces/')
 
     else:
         form = SearchForm()
@@ -103,9 +95,32 @@ def results(request):
     return render(request, 'ms/results.html', {})
 
 def results_artpieces(request):
+    # art_piece_list, piece_num= search_piece(search_query)
+
+    # if len(list(art_piece_list)) <= 0:
+    #     art_piece_list = None
+
+    context = RequestContext(request, {
+                    # 'art_piece_list': art_piece_list,
+                    # 'piece_num': piece_num,
+                    # 'query':search_query,
+    })
+
+
     return render(request, 'ms/results_artpieces.html', {})
 
 def results_events(request):
+    # art_piece_list, piece_num= search_piece(search_query)
+
+
+    # if len(list(art_piece_list)) <= 0:
+    #     art_piece_list = None
+
+    #     context = RequestContext(request, {
+    #         'art_piece_list': art_piece_list,
+    #         'piece_num': piece_num,
+    #         'query':search_query,
+    #         })
     return render(request, 'ms/results_events.html', {})
 
 
