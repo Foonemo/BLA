@@ -66,26 +66,26 @@ def search_event(query):
         row = cursor.fetchone()
         return res, row[0]
 
-# def search_collections(region,style,s_type):
+# def search_collections(region, style, s_type):
 # 	query=[]
 #         if not region == 'N/A':
-# 		query.append("region = " + region)
+#             query.append("region = " + region)
 
 #         if not style == 'N/A':
-# 		query.append("style = " + style)
+#             query.append("style = " + style)
 
 #         if not s_type == 'N/A':
-# 		query.append("s_type = " + s_type)
+#             query.append("s_type = " + s_type)
 
 #         if len(query) == 1:
-# 		return ArtPiece.objects.raw('select * from art_piece where %s',[query[0]])
-# 		#return return ArtPiece.objects.raw('select * from art_piece where %s',(query[0])
+#             return ArtPiece.objects.raw('select * from art_piece where %s',[query[0]])
+
 # 	elif:
-# 		queries = query[0]
-#                 for q in query[1:]:
-#                     queries += " AND "
-#                     queries += q
-#                 return ArtPiece.objects.raw('select * from art_piece where %s',[queries])
+#             queries = query[0]
+#             for q in query[1:]:
+#                 queries += " AND "
+#                 queries += q
+#             return ArtPiece.objects.raw('select * from art_piece where %s',[queries])
 #         else:
 #             return ArtPiece.objects.raw('select * from art_piece')
 
@@ -93,6 +93,19 @@ def search_event(query):
 def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
+
+        # dropdown queries
+        art_region = request.POST.get('region')
+        art_type = request.POST.get('type')
+        art_style = request.POST.get('style')
+
+        c = RequestContext(request, {
+            'r': art_region,
+            't': art_type,
+            's': art_style,})
+
+        return render(request, 'ms/drop.html', c)
+
         if form.is_valid():
             # Processing the data, i.e. query them from the database
             search_query = form.cleaned_data['content']

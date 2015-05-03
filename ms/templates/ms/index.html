@@ -56,12 +56,16 @@
 
 	  <div id="select_choices" class="col-sm-12">
 		<div  class="col-sm-3">
+<form action="." method="POST">
 		  <select name="region" class="form-control">
 			<option value="" disabled selected>Select Region</option>
-			{% for region in region_list %}
-			<option value="{{region}}">{{region}}</option>
-			{% endfor %}
+			<!-- {% for region in region_list %} -->
+			<option value="A"> A </option>
+			<!-- <option value="{{region}}">{{region}}</option> -->
+			<!-- {% endfor %} -->
 		  </select>
+</form>
+
 		</div>
 
 		<div  class="col-sm-3">
