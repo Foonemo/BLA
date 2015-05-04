@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<title>Search Results</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'ms/style.css' %}" />
+
+  <body>
+	<div class="container">
+
+	  <div class="col-sm-12">
+		<div id="BLA" class="col-sm-9">
+		  <h1 id="bla_title"><a href="/ms/" >B<small>irds</small> L<small>ove</small> A<small>rts</small></a> </h1>
+		</div>
+	  </div>
+
+
+	  <div id="search_column" class="col-sm-12">
+		<div class="col-sm-9">
+		  <form action="./" method="POST">
+			{% csrf_token %}
+			{{ form.content }}
+		</div>
+		<input type="submit" class="btn btn-success" value="SEARCH"/>
+		</form>
+	  </div>
+
+	  <div class="col-sm-12">
+		<h2 class="lead">Searching.. <mark>{{query}}</mark></h2>
+	  </div>
+
+	  <div class="col-sm-12">
+		<ul class="nav nav-tabs" role="tablist">
+		  <li><a href="/ms/results/search_artpieces_{{query}}/">Art Pieces</a></li>
+		  <li class="active"><a href="/ms/results/search_events_{{query}}/">Events</a></li>
+		</ul>
+
+
+		{% if event_list %}
+		<div class="table-responsive">
+		  <p> Found {{event_num}} relative Events </p>
+		  <table class="table table-hover">
+			<tr class="lead">
+			  <td>Name</td>
+			  <td>Start Time</td>
+			  <td>End Time</td>
+			  <td>Type</td>
+			  <td>Location</td>
+			</tr>
+
+			{% for event in event_list %}
+			<tr>
+			  <td>{{event.event_name}}</td>
+			  <td>{{event.start_time}}</td>
+			  <td>{{event.end_time}}</td>
+			  <td>{{event.event_type}}</td>
+			  <td>{{event.location}}</td>
+			</tr>
+
+			{% endfor %}
+		  </table>
+		</div>
+		{% else %}
+		<p>No such event is available.</p>
+		{% endif %}
+	  </div>
+	</div>
+
+  </body>
+</html>
