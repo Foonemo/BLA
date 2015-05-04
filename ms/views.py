@@ -68,19 +68,8 @@ def index(request):
         if form.is_valid():
             # Processing the data, i.e. query them from the database
             search_query = form.cleaned_data['content']
-
-            art_piece_list, piece_num= search_piece(search_query)
-
-            if len(list(art_piece_list)) <= 0:
-                art_piece_list = None
-
-            context = RequestContext(request, {
-                    'art_piece_list': art_piece_list,
-                    'piece_num': piece_num,
-                    'query':search_query,
-            })
-            return render(request, 'ms/results_artpieces.html', context)
-#            return HttpResponseRedirect('/ms/results/art_pieces/')
+            # return render(request, 'ms/results_artpieces.html', context)
+            return HttpResponseRedirect('/ms/results/search_artpieces_%s' % search_query)
 
     else:
         form = SearchForm()
@@ -94,35 +83,56 @@ def index(request):
 def results(request):
     return render(request, 'ms/results.html', {})
 
-def results_artpieces(request):
-    # art_piece_list, piece_num= search_piece(search_query)
+def results_artpieces(request, search_query):
+    # if request.method == 'POST':
+    #     form = SearchForm(request.POST)
+    #     if form.is_valid():
+    #         # do a new search
+    #         search_query = form.cleaned_data['content']
+    #         art_piece_list, piece_num= search_piece(search_query)
+    #         if len(list(art_piece_list)) <= 0:
+    #             art_piece_list = None
 
-    # if len(list(art_piece_list)) <= 0:
-    #     art_piece_list = None
+    #         context = RequestContext(request, {
+    #             'art_piece_list': art_piece_list,
+    #             'piece_num': piece_num,
+    #             'query':search_query,
+    #             'form': form,
+    #         })
+    #         return render(request, 'ms/results_artpieces.html', context)
+    #     else:
+    #         return HttpResponseRedirect('/ms/')
+    # else:
+        form = SearchForm()
+        art_piece_list, piece_num= search_piece(search_query)
+        if len(list(art_piece_list)) <= 0:
+            art_piece_list = None
+
+        context = RequestContext(request, {
+            'art_piece_list': art_piece_list,
+            'piece_num': piece_num,
+            'query':search_query,
+            'form': form,
+        })
+
+        return render(request, 'ms/results_artpieces.html', context)
+
+
+def results_events(request, search_query):
+    form = SearchForm()
+
+    event_list, event_num= search_event(search_query)
+    if len(list(event_list)) <= 0:
+        event_list = None
 
     context = RequestContext(request, {
-                    # 'art_piece_list': art_piece_list,
-                    # 'piece_num': piece_num,
-                    # 'query':search_query,
+        'event_list': event_list,
+        'event_num': event_num,
+        'query':search_query,
+        'form':form,
     })
-
-
-    return render(request, 'ms/results_artpieces.html', {})
-
-def results_events(request):
-    # art_piece_list, piece_num= search_piece(search_query)
-
-
-    # if len(list(art_piece_list)) <= 0:
-    #     art_piece_list = None
-
-    #     context = RequestContext(request, {
-    #         'art_piece_list': art_piece_list,
-    #         'piece_num': piece_num,
-    #         'query':search_query,
-    #         })
-    return render(request, 'ms/results_events.html', {})
-
+    return render(request, 'ms/results_events.html', context)
+    # return HttpResponse("%s" % search_query)
 
 def thanks(request):
     return render(request, 'ms/thanks.html', {})
