@@ -132,7 +132,6 @@ def results_events(request, search_query):
         'form':form,
     })
     return render(request, 'ms/results_events.html', context)
-    # return HttpResponse("%s" % search_query)
 
 def thanks(request):
     return render(request, 'ms/thanks.html', {})

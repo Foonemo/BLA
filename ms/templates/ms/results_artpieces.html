@@ -15,9 +15,15 @@
   <body>
 	<div class="container">
 
+	  <div class="col-sm-12">
+		<div id="BLA" class="col-sm-9">
+		  <h1 id="bla_title"><a href="/ms/"> B<small>irds</small> L<small>ove</small> A<small>rts</small></a> </h1>
+		</div>
+	  </div>
+
 	  <div id="search_column" class="col-sm-12">
 		<div class="col-sm-9">
-		  <form action="." method="POST">
+		  <form action="./" method="POST">
 			{% csrf_token %}
 			{{ form.content }}
 		</div>
@@ -25,42 +31,46 @@
 		</form>
 	  </div>
 
-	  <h2 class="lead">Searching.. <mark>{{query}}</mark></h2>
-
-	  <ul class="nav nav-tabs" role="tablist">
-		<li class="active"><a href="/ms/results/search_artpieces_{{query}/}">Art Pieces</a></li>
-		<li><a href="/ms/results/search_events_{{query}}/">Events</a></li>
-	  </ul>
-
-	  {% if art_piece_list %}
-	  <div class="table-responsive">
-		<p> Found {{piece_num}} relative Art Pieces </p>
-		<table class="table table-hover">
-		  <tr class="lead">
-			<td>Name</td>
-			<td>Region</td>
-			<td>Style</td>
-			<td>Type</td>
-			<td>Description</td>
-			<td>Artist</td>
-		  </tr>
-		  {% for art_piece in art_piece_list %}
-		  <tr>
-			<td><a href="{{art_piece.piclink}}">{{art_piece.art_name}}</a></td>
-			<td>{{art_piece.region}}</td>
-			<td >{{art_piece.style}}</td>
-			<td>{{art_piece.art_type}}</td>
-			<td>{{art_piece.description}}</td>
-			<td>{{art_piece.artist_name}}</td>
-		  </tr>
-		  {% endfor %}
-		</table>
+	  <div class="col-sm-12">
+		<h2 class="lead">Searching.. <mark>{{query}}</mark></h2>
 	  </div>
-	  {% else %}
-      <p>No such art piece is available.</p>
-	  {% endif %}
 
-</div>
 
-</body>
+	  <div class="col-sm-12">
+		<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="/ms/results/search_artpieces_{{query}/}">Art Pieces</a></li>
+		  <li><a href="/ms/results/search_events_{{query}}/">Events</a></li>
+		</ul>
+
+		{% if art_piece_list %}
+		<div class="table-responsive">
+		  <p> Found {{piece_num}} relative Art Pieces </p>
+		  <table class="table table-hover">
+			<tr class="lead">
+			  <td>Name</td>
+			  <td>Region</td>
+			  <td>Style</td>
+			  <td>Type</td>
+			  <td>Description</td>
+			  <td>Artist</td>
+			</tr>
+			{% for art_piece in art_piece_list %}
+			<tr>
+			  <td><a href="{{art_piece.piclink}}">{{art_piece.art_name}}</a></td>
+			  <td>{{art_piece.region}}</td>
+			  <td >{{art_piece.style}}</td>
+			  <td>{{art_piece.art_type}}</td>
+			  <td>{{art_piece.description}}</td>
+			  <td>{{art_piece.artist_name}}</td>
+			</tr>
+			{% endfor %}
+		  </table>
+		</div>
+		{% else %}
+		<p>No such art piece is available.</p>
+		{% endif %}
+	  </div>
+	</div>
+
+  </body>
 </html>
