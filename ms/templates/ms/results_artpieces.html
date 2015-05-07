@@ -53,6 +53,7 @@
 			  <td>Type</td>
 			  <td>Description</td>
 			  <td>Artist</td>
+			  <td>Museum</td>
 			</tr>
 			{% for art_piece in art_piece_list %}
 			<tr>
@@ -62,6 +63,7 @@
 			  <td>{{art_piece.art_type}}</td>
 			  <td>{{art_piece.description}}</td>
 			  <td>{{art_piece.artist_name}}</td>
+			  <td>{{art_piece.museum_name}}</td>
 			</tr>
 			{% endfor %}
 		  </table>

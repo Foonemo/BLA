@@ -24,7 +24,7 @@ def search_piece(query):
        cursor = connection.cursor()
        cursor.execute(
                ''' SELECT *
-               FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id
+               FROM art_piece JOIN artist JOIN `create` ON art_piece.art_id = `create`.art_id AND `create`.artist_id=artist.artist_id JOIN museum ON art_piece.museum_id = museum.museum_id
                WHERE art_name LIKE '%%' %s '%%'
                OR region LIKE '%%' %s '%%'
                OR style LIKE '%%' %s '%%'
@@ -48,7 +48,7 @@ def search_piece(query):
        return res, row[0]
 
 def search_event(query):
-        res = Event.objects.raw("SELECT * FROM event WHERE event_name LIKE '%%' %s '%%'", [query])
+        res = Event.objects.raw("SELECT * FROM event JOIN museum ON event.museum_id = museum.museum_id WHERE event_name LIKE '%%' %s '%%'", [query])
 
         cursor = connection.cursor()
         cursor.execute(

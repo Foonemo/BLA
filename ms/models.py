@@ -187,7 +187,7 @@ class Event(models.Model):
 
 class Museum(models.Model):
     museum_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=45)
+    museum_name = models.CharField(max_length=45)
     parking = models.TextField(blank=True, null=True)
     website = models.CharField(max_length=45)
     location = models.TextField()
